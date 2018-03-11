@@ -458,9 +458,9 @@
       }
     },
     "aspnet-webpack": {
-      "version": "2.0.1",
-      "resolved": "https://registry.npmjs.org/aspnet-webpack/-/aspnet-webpack-2.0.1.tgz",
-      "integrity": "sha512-hhwTmanNNk0OQ7u5Jr/wpKQeqisg4aLMmAJFlsj0B+AkaUtIu8FFOgzB63VnVirDZ14isSGjJHNn/WEhx19hKA==",
+      "version": "2.0.3",
+      "resolved": "https://registry.npmjs.org/aspnet-webpack/-/aspnet-webpack-2.0.3.tgz",
+      "integrity": "sha512-TwutLcYQlLikMJ8mcv8D9KSr5BkkFbpQDY/LABj/dMwz6EAM9azqV9WfgrQ+1UPmycS6VVgQZhITmCmTOAiYtg==",
       "dev": true,
       "requires": {
         "connect": "3.6.2",
