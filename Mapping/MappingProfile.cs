@@ -33,7 +33,7 @@ namespace MDS.Mapping
                 ForMember(dest => dest.ObjDescription, opt => opt.MapFrom(src => src.Description)).
                 ForMember(dest => dest.DateInNew, opt => opt.MapFrom(src => src.DateCreated));
             CreateMap<Shop, ShopModel>().
-               // ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id)).
+                ForMember(dest => dest.OrganizationId, opt => opt.MapFrom(src => src.Organization.Id)).
                 ForMember(dest => dest.ObjId, opt => opt.MapFrom(src => src.Id));
             CreateMap<User, UserModel>().
             ForMember(dest => dest.ObjId, opt => opt.MapFrom(src => src.Id)).
@@ -59,12 +59,19 @@ namespace MDS.Mapping
                  ForMember(dest => dest.ObjId, opt => opt.MapFrom(src => src.Id));
             CreateMap<NotificationTamplate, NotificationTemplateBaseModel>().
                 ForMember(dest => dest.ObjId, opt => opt.MapFrom(src => src.Id));
-
+            CreateMap<IBeacon, IBeaconModel>().
+               ForMember(dest => dest.ObjId, opt => opt.MapFrom(src => src.Id));
+            CreateMap<NotificationsLog, NotificationsLogModel>().
+              ForMember(dest => dest.ObjId, opt => opt.MapFrom(src => src.Id));
 
 
 
             CreateMap<UserModel, User>().
                 ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ObjId));
+            CreateMap<IBeaconModel, IBeacon>().
+                ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ObjId));
+            CreateMap<NotificationsLogModel, NotificationsLog>().
+               ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ObjId));
             CreateMap<UserBaseModel, User>().
                ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ObjId));
             CreateMap<CategoryModel, Category>().

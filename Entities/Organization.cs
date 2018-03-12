@@ -13,9 +13,10 @@ namespace MDS.Entities
     {
         public Organization()
         {
-            Categories = new List<OrganizationCategory>();
+            Categories = new HashSet<OrganizationCategory>();
             Shops = new HashSet<Shop>();
             ShareItems = new HashSet<ShareItem>();
+            IBeacons = new HashSet<IBeacon>();
         }
         [Required]
         public string Name { get; set; }
@@ -26,8 +27,9 @@ namespace MDS.Entities
         public DateTime? NewDate { get; set; }
         public virtual ICollection<ShareItem> ShareItems { get; set; }
 
-        public List<OrganizationCategory> Categories { get; set; }
+        public virtual ICollection<OrganizationCategory> Categories { get; set; }
         public virtual ICollection<Shop> Shops { get; set; }
+        public virtual ICollection<IBeacon> IBeacons { get; set; }
         public virtual ICollection<Image> Images { get; set; }
     }
 }

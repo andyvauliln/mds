@@ -12,9 +12,7 @@ namespace MDS.Models
 
     public class CategoryModel 
     {
-        [Required]
         public int ObjId { get; set; }
-        [Required]
         public string Name { get; set; }
         public string ObjDescription { get; set; }
     }

@@ -38,6 +38,23 @@ namespace MDS.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NotificationsLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OS = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NotificationsLogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NotificationTemplates",
                 columns: table => new
                 {
@@ -50,7 +67,9 @@ namespace MDS.Migrations
                     Name = table.Column<string>(nullable: true),
                     Radius = table.Column<int>(nullable: false),
                     Text = table.Column<string>(nullable: true),
-                    Type = table.Column<int>(nullable: false)
+                    Title = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false),
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,15 +130,42 @@ namespace MDS.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryOrganizations",
+                name: "Biacons",
                 columns: table => new
                 {
-                    Category_Id = table.Column<int>(nullable: false),
-                    Organization_Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    InstanceId = table.Column<string>(nullable: true),
+                    Major = table.Column<string>(nullable: true),
+                    Minor = table.Column<string>(nullable: true),
+                    OrganizationId = table.Column<int>(nullable: true),
+                    Text = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Type = table.Column<string>(nullable: true),
+                    UniqueId = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryOrganizations", x => new { x.Category_Id, x.Organization_Id });
+                    table.PrimaryKey("PK_Biacons", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Biacons_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryOrganizations",
+                columns: table => new
+                {
+                    Organization_Id = table.Column<int>(nullable: false),
+                    Category_Id = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryOrganizations", x => new { x.Organization_Id, x.Category_Id });
                     table.ForeignKey(
                         name: "FK_CategoryOrganizations_Categories_Category_Id",
                         column: x => x.Category_Id,
@@ -256,6 +302,7 @@ namespace MDS.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Male = table.Column<bool>(nullable: true),
+                    OS = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(maxLength: 30, nullable: false),
                     Points = table.Column<int>(nullable: false)
@@ -297,6 +344,16 @@ namespace MDS.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Biacons_OrganizationId",
+                table: "Biacons",
+                column: "OrganizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CategoryOrganizations_Category_Id",
+                table: "CategoryOrganizations",
+                column: "Category_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_RegionId",
@@ -347,10 +404,16 @@ namespace MDS.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Biacons");
+
+            migrationBuilder.DropTable(
                 name: "CategoryOrganizations");
 
             migrationBuilder.DropTable(
                 name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "NotificationsLogs");
 
             migrationBuilder.DropTable(
                 name: "NotificationTemplates");

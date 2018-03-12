@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using MDS.Entities;
 using Newtonsoft.Json;
 using System;
-using MDS.Entities;
 
 namespace MDS.Models
 {
@@ -11,6 +11,7 @@ namespace MDS.Models
     {
         public int ObjId { get; set; }
         public string Email { get; set; }
+        public string OS { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

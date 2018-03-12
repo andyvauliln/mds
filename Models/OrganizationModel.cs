@@ -20,7 +20,7 @@ namespace MDS.Models
 
         [JsonIgnore]
         public override ICollection<ShareItemModel> ShareItems {
-            get { return shareItem.Where(r =>(!r.TimeLimit.HasValue || r.TimeLimit > DateTime.Now) && (!r.CountLimit.HasValue || r.DownloadCount <= r.CountLimit)).OrderByDescending(r => r.DateInNew).ToList(); }
+            get { return shareItem.Where(r =>(!r.TimeLimit.HasValue || r.TimeLimit >= DateTime.Now) && (!r.CountLimit.HasValue || r.DownloadCount <= r.CountLimit)).OrderByDescending(r => r.DateInNew).ToList(); }
             set { shareItem = value; }
         }
 

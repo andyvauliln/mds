@@ -11,8 +11,8 @@ using System;
 namespace MDS.Migrations
 {
     [DbContext(typeof(MdsDbContext))]
-    [Migration("20180311223453_InitModels_fixed")]
-    partial class InitModels_fixed
+    [Migration("20180311232556_InitModels")]
+    partial class InitModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -68,6 +68,36 @@ namespace MDS.Migrations
                     b.ToTable("Contries");
                 });
 
+            modelBuilder.Entity("MDS.Entities.IBeacon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("InstanceId");
+
+                    b.Property<string>("Major");
+
+                    b.Property<string>("Minor");
+
+                    b.Property<int?>("OrganizationId");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("UniqueId");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("Biacons");
+                });
+
             modelBuilder.Entity("MDS.Entities.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -99,6 +129,26 @@ namespace MDS.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("MDS.Entities.NotificationsLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("OS");
+
+                    b.Property<string>("Text");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("Url");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NotificationsLogs");
+                });
+
             modelBuilder.Entity("MDS.Entities.NotificationTamplate", b =>
                 {
                     b.Property<int>("Id")
@@ -118,7 +168,11 @@ namespace MDS.Migrations
 
                     b.Property<string>("Text");
 
+                    b.Property<string>("Title");
+
                     b.Property<int>("Type");
+
+                    b.Property<string>("Url");
 
                     b.HasKey("Id");
 
@@ -276,6 +330,8 @@ namespace MDS.Migrations
 
                     b.Property<bool?>("Male");
 
+                    b.Property<string>("OS");
+
                     b.Property<string>("Password");
 
                     b.Property<string>("Phone")
@@ -317,6 +373,13 @@ namespace MDS.Migrations
                         .WithMany()
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MDS.Entities.IBeacon", b =>
+                {
+                    b.HasOne("MDS.Entities.Organization", "Organization")
+                        .WithMany("IBeacons")
+                        .HasForeignKey("OrganizationId");
                 });
 
             modelBuilder.Entity("MDS.Entities.Image", b =>

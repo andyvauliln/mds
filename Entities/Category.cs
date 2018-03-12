@@ -14,12 +14,12 @@ namespace MDS.Entities
     {
         public Category()
         {
-            Organizations = new List<OrganizationCategory>();
+            Organizations = new HashSet<OrganizationCategory>();
         }
 
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }
-        public  List<OrganizationCategory> Organizations { get; set; }
+        public virtual ICollection<OrganizationCategory> Organizations { get; set; }
     }
 }

@@ -15,6 +15,10 @@ namespace MDS.Entities
 
         public string Text { get; set; }
 
+        public string Title { get; set; }
+
+        public string Url { get; set; }
+
         public string Name { get; set; }
 
         public DateTime ActivationDate { get; set; }
